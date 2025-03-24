@@ -8,24 +8,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup Java JDK
-      uses: actions/setup-java@v2.5.0
+    - uses: actions/checkout@v4
+    - name: Set up JDK
+      uses: actions/setup-java@v4
       with:
-        distribution: 'zulu'
-        java-version: '11'
+        distribution: 'temurin'
+        java-version: '21'
 
     - name: tshirts fail
       run: |
         cd tshirts
-        bash ../.github/workflows/expectfail.sh java -ea tshirts.java
+        java -ea tshirts.java
 
     - name: misaligned fail
       run: |
         cd misaligned
-        bash ../.github/workflows/expectfail.sh java -ea misaligned.java
+        java -ea misaligned.java
 
-    - name: alerter fail
+    - name: weather report fail
       run: |
-        cd alerter
-        bash ../.github/workflows/expectfail.sh java -ea alerter.java
+        cd weatherreport
+        java -ea weatherreport.java
